@@ -15,8 +15,8 @@ namespace Microsoft.Owin.Security.Tests
         [Fact]
         public void HandlerConstructorShouldThrowWhenAnAllowedAudienceIsNotSpecified()
         {
-            Should.Throw<ArgumentNullException>(() => new JwtFormat((string)null, (IIssuerSecurityTokenProvider)null));
-            Should.Throw<ArgumentNullException>(() => new JwtFormat((TokenValidationParameters)null, (IIssuerSecurityTokenProvider)null));
+            Should.Throw<ArgumentNullException>(() => new JwtFormat((string)null, (IIssuerSecurityKeyProvider)null));
+            Should.Throw<ArgumentNullException>(() => new JwtFormat((TokenValidationParameters)null, (IIssuerSecurityKeyProvider)null));
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Microsoft.Owin.Security.Tests
         [Fact]
         public void HandlerConstructorShouldThrowWhenTheIssuerSecurityTokenProviderEnumerableIsEmpty()
         {
-            Should.Throw<ArgumentOutOfRangeException>(() => new JwtFormat(new[] { "urn:issuer" }, new List<IIssuerSecurityTokenProvider>()));
+            Should.Throw<ArgumentOutOfRangeException>(() => new JwtFormat(new[] { "urn:issuer" }, new List<IIssuerSecurityKeyProvider>()));
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Microsoft.Owin.Security.Tests
             Should.Throw<NotSupportedException>(() => instance.Protect(null));
         }
 
-        private class TestIssuerSecurityTokenProvider : IIssuerSecurityTokenProvider
+        private class TestIssuerSecurityTokenProvider : IIssuerSecurityKeyProvider
         {
             public TestIssuerSecurityTokenProvider(string issuer)
             {
@@ -68,9 +68,9 @@ namespace Microsoft.Owin.Security.Tests
 
             public virtual string Issuer { get; private set; }
 
-            public virtual IEnumerable<System.IdentityModel.Tokens.SecurityToken> SecurityTokens
+            public virtual IEnumerable<SecurityKey> SecurityKeys
             {
-                get { return new System.IdentityModel.Tokens.SecurityToken[0]; }
+                get { return new SecurityKey[0]; }
             }
         }
     }

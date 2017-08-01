@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -45,12 +44,6 @@ namespace FunctionalTests.Facts.Security.Common
                 new Claim("iat", GetEpocTimeStamp()),
                 new Claim("jti", Guid.NewGuid().ToString("N"))
             });
-
-            Lifetime lifetime = new Lifetime(null, null);
-            if (data.Properties.IssuedUtc != null || data.Properties.ExpiresUtc != null)
-            {
-                lifetime = new Lifetime(data.Properties.IssuedUtc != null ? (DateTime?)((DateTimeOffset)data.Properties.IssuedUtc).UtcDateTime : null, data.Properties.ExpiresUtc != null ? (DateTime?)((DateTimeOffset)data.Properties.ExpiresUtc).UtcDateTime : null);
-            }
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
