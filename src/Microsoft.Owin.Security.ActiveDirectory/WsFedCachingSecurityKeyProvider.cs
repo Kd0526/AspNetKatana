@@ -12,7 +12,7 @@ using Microsoft.Owin.Security.Jwt;
 namespace Microsoft.Owin.Security.ActiveDirectory
 {
     /// <summary>
-    /// A security token provider which retrieves the issuer and signing tokens from a WSFed metadata endpoint.
+    /// A security key provider which retrieves the issuer and signing tokens from a WSFed metadata endpoint.
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "This type is only controlled through the interface, which is not disposable.")]
     internal class WsFedCachingSecurityKeyProvider : IIssuerSecurityKeyProvider
@@ -67,10 +67,10 @@ namespace Microsoft.Owin.Security.ActiveDirectory
         }
 
         /// <summary>
-        /// Gets all known security tokens.
+        /// Gets all known security keys.
         /// </summary>
         /// <value>
-        /// All known security tokens.
+        /// All known security keys.
         /// </value>
         public IEnumerable<SecurityKey> SecurityKeys
         {

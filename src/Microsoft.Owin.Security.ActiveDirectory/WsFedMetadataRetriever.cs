@@ -31,14 +31,8 @@ namespace Microsoft.Owin.Security.ActiveDirectory
                     {
                         var serializer = new WsFederationMetadataSerializer();
                         var wsFederationConfiguration = serializer.ReadMetadata(metaDataReader);
-                        var keys = new Collection<SecurityKey>();
 
-                        foreach (var key in wsFederationConfiguration.SigningKeys)
-                        {
-                            keys.Add(key);
-                        }
-
-                        return new IssuerSigningKeys { Issuer = wsFederationConfiguration.Issuer, Keys = keys };
+                        return new IssuerSigningKeys { Issuer = wsFederationConfiguration.Issuer, Keys = wsFederationConfiguration.SigningKeys };
                     }
                 }
             }
