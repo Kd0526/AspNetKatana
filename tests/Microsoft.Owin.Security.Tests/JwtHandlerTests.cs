@@ -46,7 +46,7 @@ namespace Microsoft.Owin.Security.Tests
         [Fact]
         public void HandlerConstructorShouldNotThrowWithValidValues()
         {
-            var instance = new JwtFormat("http://audience/", new TestIssuerSecurityTokenProvider("urn:issuer"));
+            var instance = new JwtFormat("http://audience/", new TestIssuerSecurityKeyProvider("urn:issuer"));
 
             instance.ShouldNotBe(null);
         }
@@ -54,14 +54,14 @@ namespace Microsoft.Owin.Security.Tests
         [Fact]
         public void ProtectShouldThrowNotImplementedException()
         {
-            var instance = new JwtFormat("http://contoso.com", new TestIssuerSecurityTokenProvider("urn:issuer"));
+            var instance = new JwtFormat("http://contoso.com", new TestIssuerSecurityKeyProvider("urn:issuer"));
 
             Should.Throw<NotSupportedException>(() => instance.Protect(null));
         }
 
-        private class TestIssuerSecurityTokenProvider : IIssuerSecurityKeyProvider
+        private class TestIssuerSecurityKeyProvider : IIssuerSecurityKeyProvider
         {
-            public TestIssuerSecurityTokenProvider(string issuer)
+            public TestIssuerSecurityKeyProvider(string issuer)
             {
                 Issuer = issuer;
             }
